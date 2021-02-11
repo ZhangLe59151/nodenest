@@ -4,28 +4,17 @@ import * as fs from 'fs';
 
 @Injectable()
 export class CatsService {
-  private readonly cats: Cat[] = [];
-  private readonly a: any = fs.readFile(
-    'data/test.json',
-    'utf-8',
-    function (err: any, data: any) {
-      if (err) {
-        console.error(err);
-        return null;
-      } else {
-        console.info(data);
-        return data;
-      }
-    },
-  );
+  private readonly cats: Cat[] = JSON.parse(fs.readFileSync('data/cats.json').toString());
 
   create(cat: Cat) {
-    this.cats.push(cat);
+    // this.cats.push(cat);
+    let a = JSON.parse(fs.readFileSync('data/cats.json').toString())
+    a.push(cat);
+    console.info('cats: ', a);
+    fs.writeFileSync('data/cats.json', JSON.stringify(a));
   }
 
   async findAll(): Promise<any> {
-    const a = fs.readFileSync('data/cats.json');
-    console.info(JSON.parse(a.toString()));
-    return JSON.parse(a.toString()); // this.data
+    return JSON.parse(fs.readFileSync('data/cats.json').toString()); 
   }
 }

@@ -16,7 +16,8 @@ export class CatsController {
   constructor(private catsService: CatsService) {}
 
   @Post()
-  async create(@Body() createCatDto: any) {
+  async create(@Body() createCatDto: Cat) {
+    console.info('req: ', createCatDto);
     this.catsService.create(createCatDto);
   }
 
