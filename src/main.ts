@@ -8,6 +8,6 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalFilters(new HttpExceptionFilter()); // 全局注册错误的过滤器
   app.useGlobalInterceptors(new TransformInterceptor()); // 全局注册拦截器
-  await app.listen(3000);
+  await app.listen(80); // 3000
 }
 bootstrap();
